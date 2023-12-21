@@ -60,8 +60,8 @@ _.mdb
 _.opendb
 _.VC.db
 
-.csproj
-.sln
+Assembly-CSharp.csproj
+melonjam23.sln
 
 # Unity3D generated meta files
 
