@@ -60,6 +60,9 @@ _.mdb
 _.opendb
 _.VC.db
 
+.csproj
+.sln
+
 # Unity3D generated meta files
 
 _.pidb.meta
