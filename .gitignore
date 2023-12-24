@@ -46,27 +46,27 @@
 ExportedObj/
 .consulo/
 *.csproj
-_.unityproj
-_.sln
-_.suo
-_.tmp
-_.user
-_.userprefs
-_.pidb
-_.booproj
-_.svd
-_.pdb
-_.mdb
-_.opendb
-_.VC.db
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
 
 Assembly-CSharp.csproj
 melonjam23.sln
 
 # Unity3D generated meta files
 
-_.pidb.meta
-_.pdb.meta
+*.pidb.meta
+*.pdb.meta
 \*.mdb.meta
 
 # Unity3D generated file on crash reports
@@ -75,10 +75,10 @@ sysinfo.txt
 
 # Builds
 
-_.apk
-_.aab
-_.unitypackage
-_.app
+*.apk
+*.aab
+*.unitypackage
+*.app
 
 # Crashlytics generated file
 
