@@ -6,7 +6,7 @@ public class PlatformerMovement : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] public Rigidbody2D rb;
-    [SerializeField] public BoxCollider2D coll; // assuming its a rectangular sprite
+    [SerializeField] public CapsuleCollider2D coll; // assuming its a rectangular sprite
 
     private Vector2 thumbstick;
     private bool pressedJump;
@@ -43,15 +43,17 @@ public class PlatformerMovement : MonoBehaviour
         Physics2D.queriesStartInColliders = false;
 
         // Raycast up and down
-        bool hitGround = Physics2D.BoxCast(coll.bounds.center,
+        bool hitGround = Physics2D.CapsuleCast(coll.bounds.center,
                                             coll.size,
+                                            coll.direction,
                                             0,
                                             Vector2.down,
                                             detectionDistance,
                                             ~LayerMask.GetMask("Player"));
 
-        bool hitCeiling = Physics2D.BoxCast(coll.bounds.center,
+        bool hitCeiling = Physics2D.CapsuleCast(coll.bounds.center,
                                             coll.size,
+                                            coll.direction,
                                             0,
                                             Vector2.up,
                                             detectionDistance,
