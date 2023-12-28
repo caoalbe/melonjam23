@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class Backend : MonoBehaviour
 {
     private float currTime = 0f;
     // [SerializeField] private GameObject playercharacter;
 
-    void Start()
+    void Awake()
     {
         InitSingleton();
-        SetSanity(100);
-        SetHealth(3);
+        ResetState();
     }
 
     void Update()
@@ -26,6 +26,12 @@ public class Backend : MonoBehaviour
             // TODO: check if light is off instead of "&& true"
             DecaySanity();
         }
+    }
+
+    private void ResetState()
+    {
+        SetSanity(100);
+        SetHealth(3);
     }
 
     // Sanity System
@@ -41,13 +47,14 @@ public class Backend : MonoBehaviour
 
     public void SetHealth(int amount)
     {
-        health = amount;
+        this.health = amount;
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
         HealthUpdated.Invoke();
+        if (health == 0) { ReloadLevel(); }
     }
 
     public int GetHealth()
@@ -71,6 +78,14 @@ public class Backend : MonoBehaviour
         this.sanity -= sanityDecayAmount;
         SanityUpdated.Invoke();
         this.lastSanityDecayTime = currTime;
+    }
+
+    // Scene Manager
+    private void ReloadLevel()
+    {
+        ResetState();
+        string currentScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentScene);
     }
 
     // Singleton Boilerplate
