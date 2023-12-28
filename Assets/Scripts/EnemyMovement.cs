@@ -9,21 +9,22 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 1.0f;
     private bool isPlayerInvincible = false;
     public Collider2D enemyCollider;
+    public Rigidbody2D rb;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (player && !isPlayerInvincible)
         {
             var step = speed * Time.deltaTime;
-            Vector2 goalPos = new Vector2 (player.transform.position.x, transform.position.y);
+            Vector2 goalPos = new Vector2(player.transform.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, goalPos, step);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             player = collision.gameObject;
         }
@@ -41,11 +42,11 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            StartCoroutine(CollideWithPlayer());
+            StartCoroutine(CollideWithPlayer(collision.gameObject.transform.position));
         }
     }
 
-    private IEnumerator CollideWithPlayer()
+    private IEnumerator CollideWithPlayer(Vector2 playerPos)
     {
         isPlayerInvincible = true;
         Backend.instance.TakeDamage(1);
