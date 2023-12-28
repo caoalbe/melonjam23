@@ -2,6 +2,7 @@
 
 [Setup](#setup) \
 [Links](#links) \
+[Build Settings](#build-settings) \
 [Schedule](#schedule)
 
 # Setup
@@ -15,6 +16,17 @@
 TODO: [Our Submission](https://itch.io/) \
 [Wintermelon](https://itch.io/jam/winter-melonjam-2023) \
 [Discord](https://discord.gg/uYmNuZymJ2)
+
+# Build Settings
+
+Unity Project Settings: \
+Default Canvas Width: 960 \
+Default Canvas Height: 540 \
+Using Minimal WebGL template
+
+Itch.io Game Edit: \
+This file will be played in the browser: ✅ \
+Viewport dimensions: 960px by 540px (590px if Default WebGL Template)
 
 # Schedule
 
