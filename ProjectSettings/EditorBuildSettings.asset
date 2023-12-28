@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Level/Scenes/PlatformerTemplate.unity
     guid: cb5aa7a62c8455a46ae0232f102a0f27
+  - enabled: 1
+    path: Assets/Level/Scenes/SimpleUI.unity
+    guid: 92c5390097fd04940a0a4ad7abaf41d0
   m_configObjects: {}
