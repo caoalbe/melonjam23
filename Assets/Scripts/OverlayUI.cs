@@ -8,9 +8,9 @@ public class OverlayUI : MonoBehaviour
     [SerializeField] private Text HealthText;
     [SerializeField] private Text SanityText;
 
-    public void SetHealth(int value)
+    public void RefreshHealth()
     {
-        HealthText.text = "Health: " + value;
+        HealthText.text = "Health: " + Backend.instance.GetHealth();
     }
 
     public void RefreshSanity()
