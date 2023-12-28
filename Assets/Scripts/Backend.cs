@@ -36,8 +36,8 @@ public class Backend : MonoBehaviour
 
     // Health System
     private int health;
-    [Header("Health Properties")]
-    public UnityEvent HealthUpdated;
+    // [Header("Health Properties")]
+    [HideInInspector] public UnityEvent HealthUpdated;
 
     public void SetHealth(int amount)
     {
@@ -61,7 +61,7 @@ public class Backend : MonoBehaviour
     [Header("Sanity Properties")]
     [SerializeField] public int sanityDecayAmount;
     [SerializeField] public float sanityDecayCooldown;
-    public UnityEvent SanityUpdated;
+    [HideInInspector] public UnityEvent SanityUpdated;
     private float lastSanityDecayTime = 0f;
 
     public void SetSanity(int amount)
@@ -83,6 +83,9 @@ public class Backend : MonoBehaviour
     }
 
     // Scene Manager
+    [SerializeField] private Transform[] checkpoints;
+    private int currCheckpoint = 0;
+
     private void ReloadLevel()
     {
         ResetState();
