@@ -24,9 +24,25 @@ public class PlatformerMovement : MonoBehaviour
 
     void Update()
     {
-        thumbstick.x = Input.GetAxisRaw("Horizontal");
-        thumbstick.y = Input.GetAxisRaw("Vertical");
-        pressedJump = Input.GetButton("Jump");
+        // fetch controls
+        if (controlLoss)
+        {
+            thumbstick.x = 0f;
+            thumbstick.y = 0f;
+            pressedJump = false;
+        }
+        else
+        {
+            thumbstick.x = Input.GetAxisRaw("Horizontal");
+            thumbstick.y = Input.GetAxisRaw("Vertical");
+            pressedJump = Input.GetButton("Jump");
+        }
+
+        // regain control after knockback
+        if (lastHitTime + controlLossDuration < currTime)
+        {
+            controlLoss = false;
+        }
 
         currTime += Time.deltaTime;
     }
@@ -38,8 +54,8 @@ public class PlatformerMovement : MonoBehaviour
         // Compute the instantaneous velocity
         PlayerJump();
         HorizontalVelocity();
-        PlayerGravity();
         PlayerKnockback();
+        PlayerGravity();
 
         rb.velocity = instantaneousVelocity; // Apply the computed velocity
     }
@@ -101,6 +117,8 @@ public class PlatformerMovement : MonoBehaviour
 
     private void HorizontalVelocity()
     {
+        if (controlLoss) { return; }
+
         if (thumbstick.x == 0)
         {
             instantaneousVelocity.x = Mathf.MoveTowards(instantaneousVelocity.x,
@@ -134,21 +152,39 @@ public class PlatformerMovement : MonoBehaviour
 
     [Header("Knockback Properties")]
     [SerializeField] public float enemyKnockBackSpeed;
-    // TODO: create serialized field for knockback angle
-    private Vector2 sporadicVelocity = new Vector2(0, 0);
+    [SerializeField] public float angleKnockBack; // in degrees
+    [SerializeField] public float controlLossDuration;
+    private bool controlLoss = false;
+    private float lastHitTime;
+    private Vector2 kbDir = new Vector2();
+
+    private Vector2 sporadicVelocity = Vector2.zero;
     private void PlayerKnockback()
     {
-        instantaneousVelocity.x += sporadicVelocity.x;
-        instantaneousVelocity.y += sporadicVelocity.y;
-        sporadicVelocity = Vector2.zero;
+        if (sporadicVelocity != Vector2.zero)
+        {
+            instantaneousVelocity.x = sporadicVelocity.x;
+            instantaneousVelocity.y = sporadicVelocity.y;
+            sporadicVelocity = Vector2.zero;
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Vector2 kbDir = new Vector2(transform.position.x - collision.gameObject.transform.position.x, transform.up.y);
-            sporadicVelocity += kbDir.normalized * enemyKnockBackSpeed;
+            float angleRad = angleKnockBack / 180 * Mathf.PI;
+            kbDir.x = Mathf.Cos(angleRad);
+            kbDir.y = Mathf.Sin(angleRad);
+            if (transform.position.x - collision.gameObject.transform.position.x < 0)
+            {
+                kbDir.x *= -1;
+            }
+
+            sporadicVelocity += kbDir * enemyKnockBackSpeed;
+            lastHitTime = currTime;
+            controlLoss = true;
         }
     }
 }
