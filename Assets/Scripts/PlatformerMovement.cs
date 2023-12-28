@@ -72,12 +72,15 @@ public class PlatformerMovement : MonoBehaviour
     }
 
     [Header("Jumping Properties")]
-    [SerializeField] public float jumpSpeed;
+    [SerializeField] public float jumpHeight;
     private bool grounded;
 
     private void PlayerJump()
     {
-        if (grounded && pressedJump) { instantaneousVelocity.y = jumpSpeed; }
+        if (grounded && pressedJump)
+        {
+            instantaneousVelocity.y = Mathf.Sqrt(2 * fallAcceleration * (jumpHeight + 0.25f));
+        }
     }
 
 
