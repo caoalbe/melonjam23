@@ -11,6 +11,12 @@ public class OverlayUI : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    void Start()
+    {
+        Backend.instance.HealthUpdated.AddListener(RefreshHealth);
+        Backend.instance.SanityUpdated.AddListener(RefreshSanity);
+    }
+
     public void RefreshHealth()
     {
         int health = Backend.instance.GetHealth();

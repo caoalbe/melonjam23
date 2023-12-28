@@ -17,6 +17,11 @@ public class PlatformerMovement : MonoBehaviour
     private Vector2 instantaneousVelocity;
     private float currTime = 0f;
 
+    void Start()
+    {
+        transform.position = Backend.instance.GetCheckPoint();
+    }
+
     void Update()
     {
         thumbstick.x = Input.GetAxisRaw("Horizontal");
