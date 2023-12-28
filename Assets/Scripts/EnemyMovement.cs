@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 1.0f;
     private bool isPlayerInvincible = false;
     public Collider2D enemyCollider;
+    public Rigidbody2D rb;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -18,12 +19,6 @@ public class EnemyMovement : MonoBehaviour
             var step = speed * Time.deltaTime;
             Vector2 goalPos = new Vector2(player.transform.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, goalPos, step);
-        }
-        else if (isPlayerInvincible)
-        {
-            
-
-
         }
     }
 
@@ -58,7 +53,7 @@ public class EnemyMovement : MonoBehaviour
         Debug.Log(direction);
 
         Vector2 force = transform.forward * direction;
-        gameObject.GetComponent<Rigidbody2D>().AddForce(force * 100, ForceMode2D.Impulse);
+        rb.velocity = force * speed;
 
         yield return new WaitForSeconds(1);
 
