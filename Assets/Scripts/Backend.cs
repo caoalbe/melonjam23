@@ -34,16 +34,10 @@ public class Backend : MonoBehaviour
         SetHealth(3);
     }
 
-    // Sanity System
-    private int sanity; // can takes values from [0,..100]
+    // Health System
     private int health;
-    [Header("Sanity Properties")]
-    [SerializeField] public int sanityDecayAmount;
-    [SerializeField] public float sanityDecayCooldown;
-    public UnityEvent SanityUpdated;
+    [Header("Health Properties")]
     public UnityEvent HealthUpdated;
-    private float lastSanityDecayTime = 0f;
-
 
     public void SetHealth(int amount)
     {
@@ -61,6 +55,14 @@ public class Backend : MonoBehaviour
     {
         return health;
     }
+
+    // Sanity System
+    private int sanity; // takes values from [0,..100]
+    [Header("Sanity Properties")]
+    [SerializeField] public int sanityDecayAmount;
+    [SerializeField] public float sanityDecayCooldown;
+    public UnityEvent SanityUpdated;
+    private float lastSanityDecayTime = 0f;
 
     public void SetSanity(int amount)
     {
