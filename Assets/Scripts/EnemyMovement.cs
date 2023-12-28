@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class EnemyMovement : MonoBehaviour
     private bool isPlayerInvincible = false;
     public Collider2D enemyCollider;
     public Rigidbody2D rb;
+
+    public float viewAngle;
+
+    public LayerMask obstacleMask;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -26,7 +32,15 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            player = collision.gameObject;
+            Vector3 dirToTarget = (collision.transform.position - transform.position).normalized;
+            if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
+            {
+                float distToTarget = Vector3.Distance(transform.position, collision.transform.position);
+                if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, obstacleMask))
+                {
+                    player = collision.gameObject;
+                }
+            }
         }
     }
 

@@ -123,73 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &208477746
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 208477747}
-  - component: {fileID: 208477748}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &208477747
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208477746}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 633113135}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &208477748
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208477746}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 6
 --- !u!1 &354596880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,6 +1314,7 @@ GameObject:
   - component: {fileID: 563595095}
   - component: {fileID: 563595096}
   - component: {fileID: 563595093}
+  - component: {fileID: 563595097}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1470,9 +1404,9 @@ MonoBehaviour:
   rb: {fileID: 563595095}
   coll: {fileID: 563595096}
   detectionDistance: 0.05
-  jumpHeight: 4
-  runTopSpeed: 10
-  runAcceleration: 120
+  jumpHeight: 3
+  runTopSpeed: 15
+  runAcceleration: 185
   runDeceleration: 105
   fallTopSpeed: 50
   fallAcceleration: 85
@@ -1539,11 +1473,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
---- !u!4 &633113135 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4943049768009343600, guid: e66728e37cdf61f458362d8277a4e2a0, type: 3}
-  m_PrefabInstance: {fileID: 1160714019}
+--- !u!114 &563595097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563595089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d2371be2b17bb4397b08fcceb3c040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &892135290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1824,17 +1765,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8581246485295290020, guid: e66728e37cdf61f458362d8277a4e2a0, type: 3}
-      propertyPath: speed
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 4368996878478187072, guid: e66728e37cdf61f458362d8277a4e2a0, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4943049768009343600, guid: e66728e37cdf61f458362d8277a4e2a0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 208477747}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e66728e37cdf61f458362d8277a4e2a0, type: 3}
 --- !u!1 &1197968121
@@ -5525,34 +5458,10 @@ MonoBehaviour:
   sanityDecayCooldown: 2
   SanityUpdated:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1508665441}
-        m_TargetAssemblyTypeName: OverlayUI, Assembly-CSharp
-        m_MethodName: RefreshSanity
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   HealthUpdated:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1508665441}
-        m_TargetAssemblyTypeName: OverlayUI, Assembly-CSharp
-        m_MethodName: RefreshHealth
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!4 &2103147321
 Transform:
   m_ObjectHideFlags: 0
