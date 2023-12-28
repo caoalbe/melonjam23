@@ -49,6 +49,7 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator CollideWithPlayer(Vector2 playerPos)
     {
         isPlayerInvincible = true;
+        Backend.instance.TakeDamage(1);
 
         yield return new WaitForSeconds(1);
 

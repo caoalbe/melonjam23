@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,6 +13,7 @@ public class Backend : MonoBehaviour
     {
         InitSingleton();
         SetSanity(100);
+        SetHealth(3);
     }
 
     void Update()
@@ -28,11 +30,30 @@ public class Backend : MonoBehaviour
 
     // Sanity System
     private int sanity; // can takes values from [0,..100]
+    private int health;
     [Header("Sanity Properties")]
     [SerializeField] public int sanityDecayAmount;
     [SerializeField] public float sanityDecayCooldown;
     public UnityEvent SanityUpdated;
+    public UnityEvent HealthUpdated;
     private float lastSanityDecayTime = 0f;
+
+
+    public void SetHealth(int amount)
+    {
+        health = amount;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        HealthUpdated.Invoke();
+    }
+
+    public int GetHealth()
+    {
+        return health;
+    }
 
     public void SetSanity(int amount)
     {

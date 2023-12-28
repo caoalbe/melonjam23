@@ -3,17 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OverlayUI : MonoBehaviour
+public class HealthUI : MonoBehaviour
 {
-    [SerializeField] private Text SanityText;
+    public int health;
+    public int numOfHearts;
 
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
-    public void RefreshHealth()
+
+    // Start is called before the first frame update
+    void Start()
     {
-        int health = Backend.instance.GetHealth();
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    void DisplayHearts()
+    {
         for (int i = 0; i < hearts.Length; i++)
         {
             if (i < health)
@@ -25,10 +38,5 @@ public class OverlayUI : MonoBehaviour
                 hearts[i].sprite = emptyHeart;
             }
         }
-    }
-
-    public void RefreshSanity()
-    {
-        SanityText.text = "Sanity: " + Backend.instance.GetSanity();
     }
 }
