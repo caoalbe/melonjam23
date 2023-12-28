@@ -4,26 +4,56 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    [SerializeField] private GameObject trackingTarget;
-    private Vector3 cameraPosition;
-
-    [SerializeField] private float horizontalLerpValue;
-    [SerializeField] private float verticalLerpValue;
-
+    [SerializeField] private GameObject targetObj;
+    [SerializeField] private Vector2 followOffset;
+    [SerializeField] private float cameraSpeed;
+    private Vector2 threshhold;
+    private Rigidbody2D rb;
 
     void Start()
     {
-        // initialize camera position
-        cameraPosition.x = trackingTarget.transform.position.x;
-        cameraPosition.y = trackingTarget.transform.position.y;
-        cameraPosition.z = -10;
+        transform.position = new Vector3(targetObj.transform.position.x,
+                                            targetObj.transform.position.y,
+                                            transform.position.z);
+        threshhold = CalculateThreshold();
+        rb = targetObj.GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    float xDiff;
+    float yDiff;
+    Vector3 newPosition = Vector3.zero;
+    void LateUpdate()
     {
-        cameraPosition.x = Mathf.Lerp(cameraPosition.x, trackingTarget.transform.position.x, horizontalLerpValue);
-        cameraPosition.y = Mathf.Lerp(cameraPosition.y, trackingTarget.transform.position.y, verticalLerpValue);
+        Vector2 target = targetObj.transform.position;
+        xDiff = Vector2.Distance(Vector2.right * transform.position.x, Vector2.right * target.x);
+        yDiff = Vector2.Distance(Vector2.up * transform.position.y, Vector2.up * target.y);
 
-        transform.position = cameraPosition;
+        newPosition = transform.position;
+        if (Mathf.Abs(xDiff) >= threshhold.x) { newPosition.x = target.x; }
+        if (Mathf.Abs(yDiff) >= threshhold.y) { newPosition.y = target.y; }
+
+        transform.position = Vector3.MoveTowards(transform.position,
+                                                newPosition,
+                                                Mathf.Max(cameraSpeed, rb.velocity.magnitude) * Time.deltaTime);
     }
+
+
+
+    private Vector3 CalculateThreshold()
+    {
+        Rect aspect = Camera.main.pixelRect;
+        Vector2 output = new Vector2(Camera.main.orthographicSize * aspect.width / aspect.height,
+                                        Camera.main.orthographicSize);
+        return output - followOffset;
+    }
+
+    // Draw the camera bounding box
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.blue;
+    //     Vector2 border = CalculateThreshold();
+    //     Gizmos.DrawWireCube(transform.position, new Vector3(2 * border.x, 2 * border.y, 1));
+    // }
+
+
 }
