@@ -22,7 +22,7 @@ public class CameraScript : MonoBehaviour
     float xDiff;
     float yDiff;
     Vector3 newPosition = Vector3.zero;
-    void LateUpdate()
+    void FixedUpdate()
     {
         Vector2 target = targetObj.transform.position;
         xDiff = Vector2.Distance(Vector2.right * transform.position.x, Vector2.right * target.x);
