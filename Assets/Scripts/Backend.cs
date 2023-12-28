@@ -82,15 +82,28 @@ public class Backend : MonoBehaviour
         this.lastSanityDecayTime = currTime;
     }
 
-    // Scene Manager
-    [SerializeField] private Transform[] checkpoints;
-    private int currCheckpoint = 0;
+    // Scene and Checkpoint Manager
+    private Vector3 currCheckpoint;
 
     private void ReloadLevel()
     {
         ResetState();
         string currentScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentScene);
+    }
+
+    public void SetCheckPoint(Vector3 newSpawn)
+    {
+        currCheckpoint = newSpawn;
+    }
+
+    public Vector3 GetCheckPoint()
+    {
+        if (currCheckpoint == null)
+        {
+            return GameObject.Find("Checkpoints").transform.GetChild(0).position;
+        }
+        return currCheckpoint;
     }
 
     // Singleton Boilerplate
