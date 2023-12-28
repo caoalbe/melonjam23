@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO:
+// Coyote Time
+// Jump Buffering
+
 public class PlatformerMovement : MonoBehaviour
 {
     [Header("Components")]
@@ -30,6 +34,7 @@ public class PlatformerMovement : MonoBehaviour
         PlayerJump();
         HorizontalVelocity();
         PlayerGravity();
+        PlayerKnockback();
 
         rb.velocity = instantaneousVelocity; // Apply the computed velocity
     }
@@ -122,4 +127,23 @@ public class PlatformerMovement : MonoBehaviour
 
     }
 
+    [Header("Knockback Properties")]
+    [SerializeField] public float enemyKnockBackSpeed;
+    // TODO: create serialized field for knockback angle
+    private Vector2 sporadicVelocity = new Vector2(0, 0);
+    private void PlayerKnockback()
+    {
+        instantaneousVelocity.x += sporadicVelocity.x;
+        instantaneousVelocity.y += sporadicVelocity.y;
+        sporadicVelocity = Vector2.zero;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Vector2 kbDir = new Vector2(transform.position.x - collision.gameObject.transform.position.x, transform.up.y);
+            sporadicVelocity += kbDir.normalized * enemyKnockBackSpeed;
+        }
+    }
 }

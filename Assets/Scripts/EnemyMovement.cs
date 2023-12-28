@@ -24,7 +24,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             player = collision.gameObject;
         }
@@ -49,11 +49,6 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator CollideWithPlayer(Vector2 playerPos)
     {
         isPlayerInvincible = true;
-        float direction = transform.position.x - playerPos.x;
-        Debug.Log(direction);
-
-        Vector2 force = transform.forward * direction;
-        rb.velocity = force * speed;
 
         yield return new WaitForSeconds(1);
 

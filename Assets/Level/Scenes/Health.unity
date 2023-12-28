@@ -1330,6 +1330,7 @@ MonoBehaviour:
   runDeceleration: 105
   fallTopSpeed: 50
   fallAcceleration: 85
+  enemyKnockBackSpeed: 15
 --- !u!50 &563595095
 Rigidbody2D:
   serializedVersion: 4
