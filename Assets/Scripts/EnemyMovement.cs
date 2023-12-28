@@ -11,13 +11,19 @@ public class EnemyMovement : MonoBehaviour
     public Collider2D enemyCollider;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (player && !isPlayerInvincible)
         {
             var step = speed * Time.deltaTime;
-            Vector2 goalPos = new Vector2 (player.transform.position.x, transform.position.y);
+            Vector2 goalPos = new Vector2(player.transform.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, goalPos, step);
+        }
+        else if (isPlayerInvincible)
+        {
+            
+
+
         }
     }
 
@@ -41,13 +47,18 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            StartCoroutine(CollideWithPlayer());
+            StartCoroutine(CollideWithPlayer(collision.gameObject.transform.position));
         }
     }
 
-    private IEnumerator CollideWithPlayer()
+    private IEnumerator CollideWithPlayer(Vector2 playerPos)
     {
         isPlayerInvincible = true;
+        float direction = transform.position.x - playerPos.x;
+        Debug.Log(direction);
+
+        Vector2 force = transform.forward * direction;
+        gameObject.GetComponent<Rigidbody2D>().AddForce(force * 100, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(1);
 
