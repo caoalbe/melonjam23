@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6435051277741197809}
   - component: {fileID: 4391254184637591217}
   - component: {fileID: 8581246485295290020}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -147,8 +147,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: -0.014739037, y: -0.00982666}
+  m_Size: {x: 0.5185127, y: 1.0196533}
   m_Direction: 0
 --- !u!114 &8581246485295290020
 MonoBehaviour:
@@ -168,7 +168,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 1
-  speed: 55
+  speed: 200
   detectionDistance: 0.5
   raycastSize: {x: 0.85, y: 1}
   gravityAcceleration: 50
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1485679624837392638}
   - component: {fileID: 2237112745352517140}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6781,6 +6781,8 @@ MonoBehaviour:
   enemyKnockBackSpeed: 15
   angleKnockBack: 80
   controlLossDuration: 0.45
+  leftScale: {x: -1, y: 1, z: 1}
+  rightScale: {x: 1, y: 1, z: 1}
 --- !u!50 &563595095
 Rigidbody2D:
   serializedVersion: 4
@@ -6855,6 +6857,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00d463417b09f242a6ee3d3071a5d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lamp: {fileID: 0}
+  lampScale: 0
+  normalSprite: {fileID: 0}
+  ghostSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  lampTime: 0
   maxHealth: 3
   invincibilityDuration: 1
   HealthUpdated:

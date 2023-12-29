@@ -8,6 +8,15 @@ public class PlayerInfo : MonoBehaviour
     private float currTime = 0f;
     private bool isPlayerInvincible = false;
     private bool isPlayerGhost = false;
+    private float t = 0;
+    private bool isLightTurningOff = false;
+    [SerializeField] private GameObject lamp;
+    [SerializeField] private int lampScale;
+    [SerializeField] private Sprite normalSprite;
+    [SerializeField] private Sprite ghostSprite;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private float lampTime;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +28,24 @@ public class PlayerInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isLightTurningOff)
+        {
+            t += Time.deltaTime / lampTime;
+            Vector3 newScale = Vector3.Lerp(lamp.transform.localScale, Vector3.zero, t);
+            lamp.transform.localScale = newScale;
+
+            if (lamp.transform.localScale.magnitude < 0.5)
+            {
+                isLightTurningOff = false;
+                SetGhost(!isPlayerGhost);
+            }
+        }
+
         // Alternate Ghost form
         if (Input.GetKeyDown(KeyCode.E))
         {
-            SetGhost(!isPlayerGhost);
+            // Gradually reduce the lamp size
+            isLightTurningOff = true;
         }
 
         // Decay the Sanity
@@ -101,14 +124,21 @@ public class PlayerInfo : MonoBehaviour
     {
         isPlayerGhost = newForm;
         lastSanityDecayTime = currTime;
+        int ghostLayer = LayerMask.NameToLayer("Ghost");
+        int normalLayer = LayerMask.NameToLayer("Player");
         // TODO: implement this with changing sprites
         if (newForm)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 180);
+            lamp.SetActive(false);
+            spriteRenderer.sprite = ghostSprite;
+            gameObject.layer = ghostLayer;
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            lamp.SetActive(true);
+            lamp.transform.localScale = Vector3.one * lampScale;
+            spriteRenderer.sprite = normalSprite;
+            gameObject.layer = normalLayer;
         }
     }
 }
