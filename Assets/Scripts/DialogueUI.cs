@@ -8,9 +8,10 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private GameObject dialogueBox;
 
     public bool IsOpen { get; private set; }
+    public GameObject thoughtBubble;
 
     [SerializeField] private TMP_Text textLabel;
-    [SerializeField] private DialogueObject testDialogue;
+    
 
     private TypewriterEffect typewriterEffect;
     private void Start()
@@ -28,20 +29,21 @@ public class DialogueUI : MonoBehaviour
 
     private IEnumerator StepThroughDialogue(DialogueObject dialogueObject)
     {
+        Time.timeScale = 0;
         foreach (string dialogue in dialogueObject.dialogue)
         {
             yield return typewriterEffect.Run(dialogue, textLabel);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Q));
         }
-
         CloseDialogue();
     }
 
-    private void CloseDialogue()
+    public void CloseDialogue()
     {
         IsOpen = false;
         dialogueBox.SetActive(false);
         textLabel.text = string.Empty;
+        Time.timeScale = 1;
     }
 
 }

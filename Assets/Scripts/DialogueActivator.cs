@@ -4,21 +4,10 @@ using UnityEngine;
 
 public class DialogueActivator : MonoBehaviour
 {
-
     [SerializeField] private DialogueObject dialogueObject;
     [SerializeField] private List<string> dialogueContent;
     [SerializeField] private DialogueUI dialogueUI;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private bool dialogueActivated = false;
 
     public void Interact()
     {
@@ -28,7 +17,15 @@ public class DialogueActivator : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("inteact");
-        Interact();
+        if (collision.tag != "Player")
+        {
+            return;
+        }
+
+        if (!dialogueActivated)
+        {
+            Interact();
+            dialogueActivated = true;
+        }
     }
 }
