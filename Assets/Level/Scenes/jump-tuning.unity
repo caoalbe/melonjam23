@@ -6772,7 +6772,7 @@ MonoBehaviour:
   coll: {fileID: 563595096}
   detectionDistance: 0.05
   raycastSize: {x: 0.85, y: 1}
-  jumpHeight: 4
+  jumpHeight: 3.4
   runTopSpeed: 8
   runAcceleration: 120
   runDeceleration: 105
