@@ -6772,12 +6772,13 @@ MonoBehaviour:
   coll: {fileID: 563595096}
   detectionDistance: 0.05
   raycastSize: {x: 0.85, y: 1}
-  jumpHeight: 4
-  runTopSpeed: 10
+  jumpHeight: 3.4
+  runTopSpeed: 8
   runAcceleration: 120
   runDeceleration: 105
-  fallTopSpeed: 50
-  fallAcceleration: 85
+  fallTopSpeed: 22
+  riseGravityAccel: 40
+  fallGravityAccel: 65
   enemyKnockBackSpeed: 15
   angleKnockBack: 80
   controlLossDuration: 0.45
