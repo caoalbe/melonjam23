@@ -6776,8 +6776,9 @@ MonoBehaviour:
   runTopSpeed: 8
   runAcceleration: 120
   runDeceleration: 105
-  fallTopSpeed: 50
-  fallAcceleration: 35
+  fallTopSpeed: 22
+  riseGravityAccel: 40
+  fallGravityAccel: 65
   enemyKnockBackSpeed: 15
   angleKnockBack: 80
   controlLossDuration: 0.45

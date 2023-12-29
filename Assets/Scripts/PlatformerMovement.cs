@@ -110,7 +110,7 @@ public class PlatformerMovement : MonoBehaviour
     {
         if (grounded && pressedJump)
         {
-            instantaneousVelocity.y = Mathf.Sqrt(2 * fallAcceleration * (jumpHeight + 0.25f));
+            instantaneousVelocity.y = Mathf.Sqrt(2 * riseGravityAccel * (jumpHeight + 0.25f));
         }
     }
 
@@ -141,17 +141,35 @@ public class PlatformerMovement : MonoBehaviour
 
     [Header("Gravity Properties")]
     [SerializeField] public float fallTopSpeed;
-    [SerializeField] public float fallAcceleration;
+    [SerializeField] public float riseGravityAccel;
+    [SerializeField] public float fallGravityAccel;
 
     private void PlayerGravity()
     {
-        if (grounded && instantaneousVelocity.y < 0) { instantaneousVelocity.y = 0; }
-        else
+        if (grounded && instantaneousVelocity.y < 0) 
+        { 
+            instantaneousVelocity.y = 0; 
+        }
+        else if (instantaneousVelocity.y <= 0) 
         {
+            // falling from peak
             instantaneousVelocity.y = Mathf.MoveTowards(instantaneousVelocity.y,
                                                         -fallTopSpeed,
-                                                        fallAcceleration * Time.fixedDeltaTime);
+                                                        fallGravityAccel * Time.fixedDeltaTime);
+        } 
+        else if (instantaneousVelocity.y > 0) 
+        {
+            // jumping up to peak
+            instantaneousVelocity.y = Mathf.MoveTowards(instantaneousVelocity.y,
+                                                        -fallTopSpeed,
+                                                        riseGravityAccel * Time.fixedDeltaTime);
         }
+        // else
+        // {
+        //     instantaneousVelocity.y = Mathf.MoveTowards(instantaneousVelocity.y,
+        //                                                 -fallTopSpeed,
+        //                                                 riseGravityAccel * Time.fixedDeltaTime);
+        // }
 
     }
 
