@@ -42,12 +42,12 @@ public class PlatformerMovement : MonoBehaviour
         if (thumbstick.x < 0)
         {
             // face left
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = leftScale;
         }
         else if (thumbstick.x > 0)
         {
             // face right
-            transform.localScale = Vector3.one;
+            transform.localScale = rightScale;
         }
 
         // regain control after knockback
@@ -182,6 +182,10 @@ public class PlatformerMovement : MonoBehaviour
         }
 
     }
+
+    [Header("Misc.")]
+    [SerializeField] private Vector3 leftScale;
+    [SerializeField] private Vector3 rightScale;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
