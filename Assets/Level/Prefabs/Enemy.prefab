@@ -103,7 +103,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -162,13 +162,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd84e30d8cbbcc419f5862647b4f73c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   enemyCollider: {fileID: 4391254184637591217}
-  rb: {fileID: 0}
+  rb: {fileID: 6435051277741197809}
   viewAngle: 360
   obstacleMask:
     serializedVersion: 2
     m_Bits: 1
+  speed: 55
+  detectionDistance: 0.5
+  raycastSize: {x: 0.85, y: 1}
+  gravityAcceleration: 50
 --- !u!1 &4368996878478187072
 GameObject:
   m_ObjectHideFlags: 0
