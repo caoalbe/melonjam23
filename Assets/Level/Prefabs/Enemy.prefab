@@ -147,8 +147,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: -0.014739037, y: -0.00982666}
+  m_Size: {x: 0.5185127, y: 1.0196533}
   m_Direction: 0
 --- !u!114 &8581246485295290020
 MonoBehaviour:
@@ -168,7 +168,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 1
-  speed: 55
+  speed: 200
   detectionDistance: 0.5
   raycastSize: {x: 0.85, y: 1}
   gravityAcceleration: 50
