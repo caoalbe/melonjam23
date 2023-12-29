@@ -6857,12 +6857,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00d463417b09f242a6ee3d3071a5d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lamp: {fileID: 0}
-  lampScale: 0
-  normalSprite: {fileID: 0}
-  ghostSprite: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  lampTime: 0
+  lamp: {fileID: 152968158}
+  lampScale: 1
+  normalSprite: {fileID: 21300000, guid: 3f75909288275df4ea0f76fbd9eca5d5, type: 3}
+  ghostSprite: {fileID: 21300000, guid: 7508e883df645804fb4651a84c95cbe7, type: 3}
+  spriteRenderer: {fileID: 563595090}
+  lampTime: 200
   maxHealth: 3
   invincibilityDuration: 1
   HealthUpdated:
