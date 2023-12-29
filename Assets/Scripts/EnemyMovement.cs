@@ -7,11 +7,19 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 1.0f;
+    [Header("Components")]
     [SerializeField] private CapsuleCollider2D enemyCollider;
     [SerializeField] private Rigidbody2D rb;
+
+    [Header("Player Searching")]
     [SerializeField] public float viewAngle;
     [SerializeField] LayerMask obstacleMask;
+
+    [Header("Movement")]
+    [SerializeField] private float speed;
+    [SerializeField] private float detectionDistance;
+    [SerializeField] private Vector2 raycastSize;
+    [SerializeField] private float gravityAcceleration;
     private GameObject player;
     private bool grounded = false;
     private Vector2 instantaneousVelocity = new Vector2(0, 0);
@@ -25,12 +33,12 @@ public class EnemyMovement : MonoBehaviour
             Physics2D.queriesStartInColliders = false;
 
             bool hitGround = Physics2D.CapsuleCast(enemyCollider.bounds.center,
-                                            new Vector2(0.85f, 1.0f),
-                                            enemyCollider.direction,
-                                            0,
-                                            Vector2.down,
-                                            0.05f,
-                                            LayerMask.GetMask("Terrain"));
+                                                raycastSize,
+                                                enemyCollider.direction,
+                                                0,
+                                                Vector2.down,
+                                                detectionDistance,
+                                                LayerMask.GetMask("Terrain"));
 
             if (hitGround && !grounded) { grounded = true; } // Landed on Ground
             if (!hitGround && grounded) { grounded = false; } // Leaving the Ground
@@ -46,12 +54,7 @@ public class EnemyMovement : MonoBehaviour
 
             // Apply Gravity
             if (grounded && instantaneousVelocity.y < 0) { instantaneousVelocity.y = 0; }
-            else
-            {
-                instantaneousVelocity.y = Mathf.MoveTowards(instantaneousVelocity.y,
-                                                            -50.0f,
-                                                            85.0f * Time.fixedDeltaTime);
-            }
+            else { instantaneousVelocity.y = -gravityAcceleration; }
         }
         else
         {
