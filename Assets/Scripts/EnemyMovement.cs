@@ -94,10 +94,4 @@ public class EnemyMovement : MonoBehaviour
             collision.gameObject.GetComponent<PlayerInfo>().TakeDamage(1);
         }
     }
-
-    // Debugging
-    private void Print(object message)
-    {
-        if (gameObject.name == "Enemy") { Debug.Log(message); }
-    }
 }
