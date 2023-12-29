@@ -162,9 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd84e30d8cbbcc419f5862647b4f73c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 55
   enemyCollider: {fileID: 4391254184637591217}
-  rb: {fileID: 0}
+  rb: {fileID: 6435051277741197809}
   viewAngle: 360
   obstacleMask:
     serializedVersion: 2
