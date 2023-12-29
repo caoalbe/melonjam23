@@ -62,6 +62,7 @@ public class PlatformerMovement : MonoBehaviour
 
     [Header("Collision Properties")]
     [SerializeField] public float detectionDistance;
+    [SerializeField] public Vector2 raycastSize;
 
     private void CheckCollisions()
     {
@@ -70,20 +71,20 @@ public class PlatformerMovement : MonoBehaviour
 
         // Raycast up and down
         bool hitGround = Physics2D.CapsuleCast(coll.bounds.center,
-                                            coll.size,
+                                            raycastSize,
                                             coll.direction,
                                             0,
                                             Vector2.down,
                                             detectionDistance,
-                                            ~LayerMask.GetMask("Player"));
+                                            LayerMask.GetMask("Terrain"));
 
         bool hitCeiling = Physics2D.CapsuleCast(coll.bounds.center,
-                                            coll.size,
+                                            raycastSize,
                                             coll.direction,
                                             0,
                                             Vector2.up,
                                             detectionDistance,
-                                            ~LayerMask.GetMask("Player"));
+                                            LayerMask.GetMask("Terrain"));
 
         // Hit a ceiling
         if (hitCeiling) { instantaneousVelocity.y = Mathf.Min(0, instantaneousVelocity.y); }
