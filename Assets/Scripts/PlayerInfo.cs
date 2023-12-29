@@ -12,8 +12,8 @@ public class PlayerInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetHealth(3);
-        SetSanity(100);
+        SetHealth(maxHealth);
+        SetSanity(maxSanity);
     }
 
     // Update is called once per frame
