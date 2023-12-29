@@ -109,13 +109,11 @@ public class PlayerInfo : MonoBehaviour
         {
             lamp.SetActive(false);
             gameObject.layer = ghostLayer;
-            transform.rotation = Quaternion.Euler(0, 0, 180);
         }
         else
         {
             lamp.SetActive(true);
             gameObject.layer = normalLayer;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 }

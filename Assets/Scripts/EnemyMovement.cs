@@ -84,6 +84,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            instantaneousVelocity.x = 0;
             player = null;
         }
     }
