@@ -9,7 +9,6 @@ public class EnemyMovement : MonoBehaviour
 {
     private GameObject player;
     public float speed = 1.0f;
-    private bool isPlayerInvincible = false;
     public Collider2D enemyCollider;
     public Rigidbody2D rb;
 
@@ -20,7 +19,7 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (player && !isPlayerInvincible)
+        if (player)
         {
             var step = speed * Time.deltaTime;
             Vector2 goalPos = new Vector2(player.transform.position.x, transform.position.y);
@@ -56,17 +55,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            StartCoroutine(CollideWithPlayer(collision.gameObject.transform.position));
+            collision.gameObject.GetComponent<PlayerInfo>().TakeDamage(1);
         }
-    }
-
-    private IEnumerator CollideWithPlayer(Vector2 playerPos)
-    {
-        isPlayerInvincible = true;
-        Backend.instance.TakeDamage(1);
-
-        yield return new WaitForSeconds(1);
-
-        isPlayerInvincible = false;
     }
 }

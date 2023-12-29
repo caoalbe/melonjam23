@@ -6,20 +6,15 @@ using UnityEngine.UI;
 public class OverlayUI : MonoBehaviour
 {
     [SerializeField] private Text SanityText;
+    [SerializeField] private GameObject Player;
 
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
-    void Start()
-    {
-        Backend.instance.HealthUpdated.AddListener(RefreshHealth);
-        Backend.instance.SanityUpdated.AddListener(RefreshSanity);
-    }
-
     public void RefreshHealth()
     {
-        int health = Backend.instance.GetHealth();
+        int health = Player.GetComponent<PlayerInfo>().GetHealth();
         for (int i = 0; i < hearts.Length; i++)
         {
             if (i < health)
@@ -35,6 +30,6 @@ public class OverlayUI : MonoBehaviour
 
     public void RefreshSanity()
     {
-        SanityText.text = "Sanity: " + Backend.instance.GetSanity();
+        SanityText.text = "Sanity: " + Player.GetComponent<PlayerInfo>().GetSanity();
     }
 }
