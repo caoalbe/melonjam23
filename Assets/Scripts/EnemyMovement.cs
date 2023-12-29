@@ -56,17 +56,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            StartCoroutine(CollideWithPlayer(collision.gameObject.transform.position));
+            collision.gameObject.GetComponent<PlayerInfo>().TakeDamage(1);
         }
-    }
-
-    private IEnumerator CollideWithPlayer(Vector2 playerPos)
-    {
-        isPlayerInvincible = true;
-        Backend.instance.TakeDamage(1);
-
-        yield return new WaitForSeconds(1);
-
-        isPlayerInvincible = false;
     }
 }
