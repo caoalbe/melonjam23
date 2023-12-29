@@ -172,6 +172,8 @@ MonoBehaviour:
   detectionDistance: 0.5
   raycastSize: {x: 0.85, y: 1}
   gravityAcceleration: 50
+  leftScale: {x: 1, y: 1, z: 1}
+  rightScale: {x: -1, y: 1, z: 1}
 --- !u!1 &4368996878478187072
 GameObject:
   m_ObjectHideFlags: 0

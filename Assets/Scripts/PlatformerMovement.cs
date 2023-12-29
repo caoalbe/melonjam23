@@ -38,6 +38,10 @@ public class PlatformerMovement : MonoBehaviour
             pressedJump = Input.GetButton("Jump");
         }
 
+        // face character in correct direction
+        if (thumbstick.x < 0) { transform.localScale = leftScale; }
+        else if (thumbstick.x > 0) { transform.localScale = rightScale; }
+
         // regain control after knockback
         if (lastHitTime + controlLossDuration < currTime)
         {
@@ -170,6 +174,10 @@ public class PlatformerMovement : MonoBehaviour
         }
 
     }
+
+    [Header("Misc.")]
+    [SerializeField] private Vector3 leftScale;
+    [SerializeField] private Vector3 rightScale;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
