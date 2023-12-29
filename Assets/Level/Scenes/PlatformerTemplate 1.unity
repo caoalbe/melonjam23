@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 525696969}
   - component: {fileID: 525696970}
   - component: {fileID: 525696968}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5870,6 +5870,7 @@ MonoBehaviour:
   rb: {fileID: 563595095}
   coll: {fileID: 563595096}
   detectionDistance: 0.05
+  raycastSize: {x: 0.85, y: 1}
   jumpHeight: 4
   runTopSpeed: 10
   runAcceleration: 120
@@ -5877,6 +5878,8 @@ MonoBehaviour:
   fallTopSpeed: 50
   fallAcceleration: 85
   enemyKnockBackSpeed: 15
+  angleKnockBack: 80
+  controlLossDuration: 0.45
 --- !u!50 &563595095
 Rigidbody2D:
   serializedVersion: 4
@@ -11129,7 +11132,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -11173,9 +11176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00124640aaa198244911f92429eac8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackingTarget: {fileID: 563595089}
-  horizontalLerpValue: 0.85
-  verticalLerpValue: 0.75
+  targetObj: {fileID: 563595089}
+  followOffset: {x: 7.8, y: 2.5}
+  cameraSpeed: 1.5
 --- !u!1 &2103147319
 GameObject:
   m_ObjectHideFlags: 0

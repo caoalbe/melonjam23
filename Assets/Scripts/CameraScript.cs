@@ -29,7 +29,8 @@ public class CameraScript : MonoBehaviour
         yDiff = Vector2.Distance(Vector2.up * transform.position.y, Vector2.up * target.y);
 
         newPosition = transform.position;
-        if (Mathf.Abs(xDiff) >= threshhold.x) { newPosition.x = target.x; }
+        // if (Mathf.Abs(xDiff) >= threshhold.x) { newPosition.x = target.x; }
+        newPosition.x = target.x;
         if (Mathf.Abs(yDiff) >= threshhold.y) { newPosition.y = target.y; }
 
         transform.position = Vector3.MoveTowards(transform.position,
