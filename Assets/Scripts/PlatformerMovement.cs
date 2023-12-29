@@ -38,6 +38,18 @@ public class PlatformerMovement : MonoBehaviour
             pressedJump = Input.GetButton("Jump");
         }
 
+        // face character in correct direction
+        if (thumbstick.x < 0)
+        {
+            // face left
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (thumbstick.x > 0)
+        {
+            // face right
+            transform.localScale = Vector3.one;
+        }
+
         // regain control after knockback
         if (lastHitTime + controlLossDuration < currTime)
         {
