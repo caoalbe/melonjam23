@@ -18,7 +18,6 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Print(rb.velocity.x);
         if (player)
         {
             // Check Grounded
