@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6435051277741197809}
   - component: {fileID: 4391254184637591217}
   - component: {fileID: 8581246485295290020}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1485679624837392638}
   - component: {fileID: 2237112745352517140}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

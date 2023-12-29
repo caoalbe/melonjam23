@@ -6855,6 +6855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00d463417b09f242a6ee3d3071a5d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lamp: {fileID: 152968158}
   maxHealth: 3
   invincibilityDuration: 1
   HealthUpdated:

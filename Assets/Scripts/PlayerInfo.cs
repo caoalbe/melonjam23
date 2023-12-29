@@ -8,6 +8,7 @@ public class PlayerInfo : MonoBehaviour
     private float currTime = 0f;
     private bool isPlayerInvincible = false;
     private bool isPlayerGhost = false;
+    [SerializeField] private GameObject lamp;
 
     // Start is called before the first frame update
     void Start()
@@ -101,13 +102,19 @@ public class PlayerInfo : MonoBehaviour
     {
         isPlayerGhost = newForm;
         lastSanityDecayTime = currTime;
+        int ghostLayer = LayerMask.NameToLayer("Ghost");
+        int normalLayer = LayerMask.NameToLayer("Player");
         // TODO: implement this with changing sprites
         if (newForm)
         {
+            lamp.SetActive(false);
+            gameObject.layer = ghostLayer;
             transform.rotation = Quaternion.Euler(0, 0, 180);
         }
         else
         {
+            lamp.SetActive(true);
+            gameObject.layer = normalLayer;
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
