@@ -39,16 +39,8 @@ public class PlatformerMovement : MonoBehaviour
         }
 
         // face character in correct direction
-        if (thumbstick.x < 0)
-        {
-            // face left
-            transform.localScale = leftScale;
-        }
-        else if (thumbstick.x > 0)
-        {
-            // face right
-            transform.localScale = rightScale;
-        }
+        if (thumbstick.x < 0) { transform.localScale = leftScale; }
+        else if (thumbstick.x > 0) { transform.localScale = rightScale; }
 
         // regain control after knockback
         if (lastHitTime + controlLossDuration < currTime)

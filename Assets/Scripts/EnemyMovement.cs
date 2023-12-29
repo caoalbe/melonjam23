@@ -20,6 +20,11 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float detectionDistance;
     [SerializeField] private Vector2 raycastSize;
     [SerializeField] private float gravityAcceleration;
+
+    [Header("Misc.")]
+    [SerializeField] private Vector3 leftScale;
+    [SerializeField] private Vector3 rightScale;
+
     private GameObject player;
     private bool grounded = false;
     private Vector2 instantaneousVelocity = new Vector2(0, 0);
@@ -60,6 +65,11 @@ public class EnemyMovement : MonoBehaviour
         {
             // TODO: implement idle behaviour
         }
+
+        // face character in correct direction
+        if (instantaneousVelocity.x < 0) { transform.localScale = leftScale; }
+        else if (instantaneousVelocity.x > 0) { transform.localScale = rightScale; }
+
         rb.velocity = instantaneousVelocity;
     }
 
