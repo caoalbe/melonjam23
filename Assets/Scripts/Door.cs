@@ -7,7 +7,7 @@ public class Door : MonoBehaviour
     [SerializeField] private Vector3 closedPos;
     [SerializeField] private Vector3 openPos;
     [SerializeField] private float doorSpeed;
-    [SerializeField] private float frameRate; // TODO!!!
+    [SerializeField] private float frameRate;
 
     private Coroutine activeCoroutine;
     private float framePeriod;
@@ -18,7 +18,6 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
-        // TODO: is check necessary?
         if (activeCoroutine != null) { StopCoroutine(activeCoroutine); }
 
         activeCoroutine = StartCoroutine(OpenAnim());
