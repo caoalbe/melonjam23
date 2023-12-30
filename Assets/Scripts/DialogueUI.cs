@@ -8,7 +8,6 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private GameObject dialogueBox;
 
     public bool IsOpen { get; private set; }
-    public GameObject thoughtBubble;
 
     [SerializeField] private TMP_Text textLabel;
     
