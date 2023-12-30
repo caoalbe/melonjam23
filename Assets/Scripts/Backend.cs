@@ -15,6 +15,12 @@ public class Backend : MonoBehaviour
     private Vector3 currCheckpoint;
     private bool reachSomeCheckpoint = false;
 
+    public void RestartGame()
+    {
+        reachSomeCheckpoint = false;
+        ReloadLevel();
+    }
+
     public void ReloadLevel()
     {
         string currentScene = SceneManager.GetActiveScene().name;
@@ -35,6 +41,11 @@ public class Backend : MonoBehaviour
             return GameObject.Find("Player").transform.position;
         }
         return currCheckpoint;
+    }
+
+    public void Testing()
+    {
+        Debug.Log("queries backend");
     }
 
     // Singleton Boilerplate
