@@ -37,6 +37,8 @@ public class PlatformerMovement : MonoBehaviour
             thumbstick.x = Input.GetAxisRaw("Horizontal");
             thumbstick.y = Input.GetAxisRaw("Vertical");
             pressedJump = Input.GetButton("Jump");
+
+            if (pressedJump) { lastPressedJumpTime = Time.time; }
         }
 
         // TODO: Use flip in sprite-renderer instead
@@ -101,18 +103,28 @@ public class PlatformerMovement : MonoBehaviour
         if (hitGround && !grounded) { grounded = true; }
 
         // Leaving the Ground
-        if (!hitGround && grounded) { grounded = false; }
+        if (!hitGround && grounded) { 
+            grounded = false;
+            lastLeftGroundTime = Time.time;
+        }
 
         Physics2D.queriesStartInColliders = stashStartInColliders;
     }
 
     [Header("Jumping Properties")]
     [SerializeField] public float jumpHeight;
-    private bool grounded;
+    [SerializeField] private float coyoteTime;
+    [SerializeField] private float jumpBuffer;
+    private bool grounded = false;
+    private float lastPressedJumpTime = -999.9f;
+    private float lastLeftGroundTime = -999.9f;
 
     private void PlayerJump()
     {
-        if (grounded && pressedJump)
+        // bool satisfyBuffer = Time.time <= lastPressedJumpTime + jumpBuffer;
+        // bool satisfyCoyote = Time.time <= lastLeftGroundTime + coyoteTime;
+        if ((grounded || Time.time <= lastLeftGroundTime + coyoteTime) && 
+            (pressedJump || Time.time <= lastPressedJumpTime + jumpBuffer))
         {
             instantaneousVelocity.y = Mathf.Sqrt(2 * riseGravityAccel * (jumpHeight + 0.25f));
         }
@@ -168,13 +180,6 @@ public class PlatformerMovement : MonoBehaviour
                                                         -fallTopSpeed,
                                                         riseGravityAccel * Time.fixedDeltaTime);
         }
-        // else
-        // {
-        //     instantaneousVelocity.y = Mathf.MoveTowards(instantaneousVelocity.y,
-        //                                                 -fallTopSpeed,
-        //                                                 riseGravityAccel * Time.fixedDeltaTime);
-        // }
-
     }
 
     [Header("Knockback Properties")]
