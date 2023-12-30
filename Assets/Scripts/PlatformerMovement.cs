@@ -112,6 +112,7 @@ public class PlatformerMovement : MonoBehaviour
     [SerializeField] public float jumpHeight;
     [SerializeField] private float coyoteTime;
     [SerializeField] private float jumpBuffer;
+    [SerializeField] private AudioSource jumpSFX;
     private bool grounded = false;
     private float lastPressedJumpTime = -999.9f;
     private float lastLeftGroundTime = -999.9f;
@@ -124,6 +125,7 @@ public class PlatformerMovement : MonoBehaviour
             (pressedJump || Time.time <= lastPressedJumpTime + jumpBuffer))
         {
             instantaneousVelocity.y = Mathf.Sqrt(2 * riseGravityAccel * (jumpHeight + 0.25f));
+            jumpSFX.Play();
         }
     }
 
