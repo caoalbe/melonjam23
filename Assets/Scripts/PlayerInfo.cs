@@ -84,7 +84,7 @@ public class PlayerInfo : MonoBehaviour
     private IEnumerator Death()
     {
         transitionScreen.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSecondsRealtime(1);
         transitionScreen.SetActive(false);
         Backend.instance.ReloadLevel();
     }
