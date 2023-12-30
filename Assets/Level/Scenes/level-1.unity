@@ -50490,7 +50490,7 @@ MonoBehaviour:
   closedPos: {x: 17.21, y: 4.42, z: -0.3553042}
   openPos: {x: 17.21, y: 2.19, z: -0.3553042}
   doorSpeed: 5
-  frameRate: 24
+  frameRate: 12
 --- !u!61 &1592223835
 BoxCollider2D:
   m_ObjectHideFlags: 0

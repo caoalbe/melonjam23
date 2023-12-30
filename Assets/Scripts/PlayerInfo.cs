@@ -141,4 +141,9 @@ public class PlayerInfo : MonoBehaviour
             gameObject.layer = normalLayer;
         }
     }
+
+    public bool GetIsGhost()
+    {
+        return this.isPlayerGhost;
+    }
 }

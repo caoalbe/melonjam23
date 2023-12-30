@@ -93,7 +93,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" || collision.tag == "Ghost")
         {
             instantaneousVelocity.x = 0;
             player = null;
@@ -103,7 +103,8 @@ public class EnemyMovement : MonoBehaviour
     // Deal Damage
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Ghost")
         {
             collision.gameObject.GetComponent<PlayerInfo>().TakeDamage(1);
         }
