@@ -77,16 +77,8 @@ public class PlayerInfo : MonoBehaviour
         HealthUpdated.Invoke();
         lastHitTime = Time.time;
         if (health == 0) {
-            StartCoroutine(Death()); 
+            Backend.instance.ReloadLevel();
         }
-    }
-
-    private IEnumerator Death()
-    {
-        transitionScreen.SetActive(true);
-        yield return new WaitForSecondsRealtime(1);
-        transitionScreen.SetActive(false);
-        Backend.instance.ReloadLevel();
     }
 
     // Ghost System
