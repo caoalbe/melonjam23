@@ -5,24 +5,10 @@ using UnityEngine.Events;
 
 public class PlayerInfo : MonoBehaviour
 {
-    private float currTime = 0f;
-    private bool isPlayerInvincible = false;
-    private bool isPlayerGhost = false;
-    private float t = 0;
-    private bool isLightTurningOff = false;
-    [SerializeField] private GameObject lamp;
-    [SerializeField] private int lampScale;
-    [SerializeField] private Sprite normalSprite;
-    [SerializeField] private Sprite ghostSprite;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private float lampTime;
-
-
     // Start is called before the first frame update
     void Start()
     {
         SetHealth(maxHealth);
-        SetSanity(maxSanity);
     }
 
     // Update is called once per frame
@@ -48,20 +34,19 @@ public class PlayerInfo : MonoBehaviour
             isLightTurningOff = true;
         }
 
-        // Decay the Sanity
-        if (isPlayerGhost && lastSanityDecayTime + sanityDecayCooldown <= currTime)
-        {
-            DecaySanity();
-        }
-
         // Make player vincible
-        if (lastHitTime + invincibilityDuration <= currTime)
+        if (lastHitTime + invincibilityDuration <= Time.time)
         {
             isPlayerInvincible = false;
         }
-
-        currTime += Time.deltaTime;
     }
+
+    // Lamp System
+    private float t = 0;
+    private bool isLightTurningOff = false;
+    [SerializeField] private GameObject lamp;
+    [SerializeField] private int lampScale;
+    [SerializeField] private float lampTime;
 
     // Health System
     private int health;
@@ -70,6 +55,7 @@ public class PlayerInfo : MonoBehaviour
     [SerializeField] private float invincibilityDuration;
     [SerializeField] public UnityEvent HealthUpdated;
     private float lastHitTime = 0f;
+    private bool isPlayerInvincible = false;
 
     public int GetHealth()
     {
@@ -88,42 +74,19 @@ public class PlayerInfo : MonoBehaviour
         health -= damage;
         isPlayerInvincible = true;
         HealthUpdated.Invoke();
-        lastHitTime = currTime;
+        lastHitTime = Time.time;
         if (health == 0) { Backend.instance.ReloadLevel(); }
     }
 
-    // Sanity System
-    private int sanity; // takes values from [0,..100]
-    [Header("Sanity Properties")]
-    [SerializeField] private int maxSanity;
-    [SerializeField] public int sanityDecayAmount;
-    [SerializeField] public float sanityDecayCooldown;
-    public UnityEvent SanityUpdated;
-    private float lastSanityDecayTime = 0f;
-
-    public int GetSanity()
-    {
-        return this.sanity;
-    }
-
-    public void SetSanity(int amount)
-    {
-        this.sanity = amount;
-        SanityUpdated.Invoke();
-    }
-
-    private void DecaySanity()
-    {
-        this.sanity -= sanityDecayAmount;
-        SanityUpdated.Invoke();
-        this.lastSanityDecayTime = currTime;
-    }
-
     // Ghost System
+    private bool isPlayerGhost = false;
+    [SerializeField] private Sprite normalSprite;
+    [SerializeField] private Sprite ghostSprite;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     private void SetGhost(bool newForm)
     {
         isPlayerGhost = newForm;
-        lastSanityDecayTime = currTime;
         int ghostLayer = LayerMask.NameToLayer("Ghost");
         int normalLayer = LayerMask.NameToLayer("Player");
         if (newForm)

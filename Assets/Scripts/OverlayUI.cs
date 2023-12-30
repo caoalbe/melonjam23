@@ -27,9 +27,4 @@ public class OverlayUI : MonoBehaviour
             }
         }
     }
-
-    public void RefreshSanity()
-    {
-        SanityText.text = "Sanity: " + Player.GetComponent<PlayerInfo>().GetSanity();
-    }
 }
