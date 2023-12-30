@@ -64,8 +64,8 @@ public class EnemyMovement : MonoBehaviour
         }
 
         // Apply Gravity
-            if (grounded && instantaneousVelocity.y < 0) { instantaneousVelocity.y = 0; }
-            else { instantaneousVelocity.y = -gravityAcceleration; }
+        if (grounded && instantaneousVelocity.y < 0) { instantaneousVelocity.y = 0; }
+        else { instantaneousVelocity.y = -gravityAcceleration; }
 
         // face character in correct direction
         if (instantaneousVelocity.x < 0) { transform.localScale = leftScale; }
