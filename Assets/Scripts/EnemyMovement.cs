@@ -20,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float detectionDistance;
     [SerializeField] private Vector2 raycastSize;
     [SerializeField] private float gravityAcceleration;
+    [SerializeField] private float gravityTopSpeed;
 
     [Header("Misc.")]
     [SerializeField] private Vector3 leftScale;
@@ -67,7 +68,13 @@ public class EnemyMovement : MonoBehaviour
 
         // Apply Gravity
         if (grounded && instantaneousVelocity.y < 0) { instantaneousVelocity.y = 0; }
-        else { instantaneousVelocity.y = -gravityAcceleration; }
+        else 
+        { 
+            instantaneousVelocity.y = Mathf.MoveTowards(instantaneousVelocity.y,
+                                            -gravityTopSpeed,
+                                            gravityAcceleration * Time.fixedDeltaTime);
+  
+        }
 
         // face character in correct direction
         if (instantaneousVelocity.x < 0) { transform.localScale = leftScale; }
