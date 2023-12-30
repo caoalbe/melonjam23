@@ -16,7 +16,6 @@ public class PlatformerMovement : MonoBehaviour
     private Vector2 thumbstick;
     private bool pressedJump;
     private Vector2 instantaneousVelocity;
-    private float currTime = 0f;
 
     void Start()
     {
@@ -47,12 +46,10 @@ public class PlatformerMovement : MonoBehaviour
         else if (thumbstick.x > 0) { transform.localScale = rightScale; }
 
         // regain control after knockback
-        if (lastHitTime + controlLossDuration < currTime)
+        if (lastHitTime + controlLossDuration < Time.time)
         {
             controlLoss = false;
         }
-
-        currTime += Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -219,7 +216,7 @@ public class PlatformerMovement : MonoBehaviour
             }
 
             sporadicVelocity += kbDir * enemyKnockBackSpeed;
-            lastHitTime = currTime;
+            lastHitTime = Time.time;
             controlLoss = true;
         }
     }
