@@ -11,6 +11,7 @@ public class PlatformerMovement : MonoBehaviour
     [Header("Components")]
     [SerializeField] public Rigidbody2D rb;
     [SerializeField] public CapsuleCollider2D coll; // assuming its a rectangular sprite
+    [SerializeField] public Animator animator;
 
     private Vector2 thumbstick;
     private bool pressedJump;
@@ -63,6 +64,8 @@ public class PlatformerMovement : MonoBehaviour
         PlayerGravity();
 
         rb.velocity = instantaneousVelocity; // Apply the computed velocity
+
+        animator.SetFloat("VeloX", Mathf.Abs(rb.velocity.x));
     }
 
     [Header("Collision Properties")]
