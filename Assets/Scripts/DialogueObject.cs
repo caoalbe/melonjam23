@@ -8,5 +8,6 @@ public class DialogueObject : ScriptableObject
     [SerializeField] public bool IsTutorial;
     [SerializeField] public bool IsTutorialDone;
     [SerializeField] public bool FirstDialogue;
+    [SerializeField] public bool LastDialogue;
 
 }

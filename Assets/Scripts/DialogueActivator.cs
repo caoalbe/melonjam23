@@ -16,6 +16,7 @@ public class DialogueActivator : MonoBehaviour
     [SerializeField] public bool IsTutorial;
     [SerializeField] public bool IsTutorialDone;
     [SerializeField] public bool FirstDialogue;
+    [SerializeField] public bool LastDialogue;
 
     public void Interact()
     {
@@ -24,6 +25,7 @@ public class DialogueActivator : MonoBehaviour
         dialogueObject.IsTutorial = IsTutorial;
         dialogueObject.IsTutorialDone = IsTutorialDone;
         dialogueObject.FirstDialogue = FirstDialogue;
+        dialogueObject.LastDialogue = LastDialogue;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

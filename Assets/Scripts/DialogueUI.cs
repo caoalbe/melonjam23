@@ -15,6 +15,7 @@ public class DialogueUI : MonoBehaviour
 
     [SerializeField] private GameObject promptQ;
     [SerializeField] private GameObject promptE;
+    [SerializeField] private GameObject finalScreen;
 
     private void Start()
     {
@@ -69,7 +70,12 @@ public class DialogueUI : MonoBehaviour
             yield return null;
         }
 
+        if (dialogueObject.LastDialogue)
+        {
+            finalScreen.SetActive(true);
+        }
         CloseDialogue();
+        
     }
 
     public void CloseDialogue()
