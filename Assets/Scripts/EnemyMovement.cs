@@ -31,25 +31,25 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Check Grounded
+        bool stashStartInColliders = Physics2D.queriesStartInColliders;
+        Physics2D.queriesStartInColliders = false;
+
+        bool hitGround = Physics2D.CapsuleCast(enemyCollider.bounds.center,
+                                            raycastSize,
+                                            enemyCollider.direction,
+                                            0,
+                                            Vector2.down,
+                                            detectionDistance,
+                                            LayerMask.GetMask("Terrain"));
+
+        if (hitGround && !grounded) { grounded = true; } // Landed on Ground
+        if (!hitGround && grounded) { grounded = false; } // Leaving the Ground
+
+        Physics2D.queriesStartInColliders = stashStartInColliders;
+
         if (player)
         {
-            // Check Grounded
-            bool stashStartInColliders = Physics2D.queriesStartInColliders;
-            Physics2D.queriesStartInColliders = false;
-
-            bool hitGround = Physics2D.CapsuleCast(enemyCollider.bounds.center,
-                                                raycastSize,
-                                                enemyCollider.direction,
-                                                0,
-                                                Vector2.down,
-                                                detectionDistance,
-                                                LayerMask.GetMask("Terrain"));
-
-            if (hitGround && !grounded) { grounded = true; } // Landed on Ground
-            if (!hitGround && grounded) { grounded = false; } // Leaving the Ground
-
-            Physics2D.queriesStartInColliders = stashStartInColliders;
-
             // TODO: Use flip in sprite-renderer instead
             // Move left-right
             instantaneousVelocity.x = speed * Time.fixedDeltaTime;
@@ -57,15 +57,15 @@ public class EnemyMovement : MonoBehaviour
             {
                 instantaneousVelocity.x *= -1;
             }
-
-            // Apply Gravity
-            if (grounded && instantaneousVelocity.y < 0) { instantaneousVelocity.y = 0; }
-            else { instantaneousVelocity.y = -gravityAcceleration; }
         }
         else
         {
             // TODO: implement idle behaviour
         }
+
+        // Apply Gravity
+            if (grounded && instantaneousVelocity.y < 0) { instantaneousVelocity.y = 0; }
+            else { instantaneousVelocity.y = -gravityAcceleration; }
 
         // face character in correct direction
         if (instantaneousVelocity.x < 0) { transform.localScale = leftScale; }
@@ -77,7 +77,7 @@ public class EnemyMovement : MonoBehaviour
     // Player Detection
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && !collision.gameObject.GetComponent<PlayerInfo>().GetIsGhost())
         {
             Vector3 dirToTarget = (collision.transform.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
@@ -93,7 +93,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player" || collision.tag == "Ghost")
+        if (collision.tag == "Player")
         {
             instantaneousVelocity.x = 0;
             player = null;
@@ -104,7 +104,7 @@ public class EnemyMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision.gameObject.tag);
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Ghost")
+        if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerInfo>().TakeDamage(1);
         }

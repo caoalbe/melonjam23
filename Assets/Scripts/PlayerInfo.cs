@@ -126,7 +126,6 @@ public class PlayerInfo : MonoBehaviour
         lastSanityDecayTime = currTime;
         int ghostLayer = LayerMask.NameToLayer("Ghost");
         int normalLayer = LayerMask.NameToLayer("Player");
-        // TODO: implement this with changing sprites
         if (newForm)
         {
             lamp.SetActive(false);
