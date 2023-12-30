@@ -97,7 +97,13 @@ public class PlatformerMovement : MonoBehaviour
         if (hitCeiling) { instantaneousVelocity.y = Mathf.Min(0, instantaneousVelocity.y); }
 
         // Landed on Ground
-        if (hitGround && !grounded) { grounded = true; }
+        if (hitGround && !grounded) 
+        { 
+            grounded = true; 
+            
+            landSFX.pitch = Random.Range(0.6f, 0.9f);
+            landSFX.Play();
+        }
 
         // Leaving the Ground
         if (!hitGround && grounded) { 
@@ -112,6 +118,8 @@ public class PlatformerMovement : MonoBehaviour
     [SerializeField] public float jumpHeight;
     [SerializeField] private float coyoteTime;
     [SerializeField] private float jumpBuffer;
+    [SerializeField] private AudioSource jumpSFX;
+    [SerializeField] private AudioSource landSFX;
     private bool grounded = false;
     private float lastPressedJumpTime = -999.9f;
     private float lastLeftGroundTime = -999.9f;
@@ -124,6 +132,9 @@ public class PlatformerMovement : MonoBehaviour
             (pressedJump || Time.time <= lastPressedJumpTime + jumpBuffer))
         {
             instantaneousVelocity.y = Mathf.Sqrt(2 * riseGravityAccel * (jumpHeight + 0.25f));
+            
+            jumpSFX.pitch = Random.Range(0.6f, 0.9f);
+            jumpSFX.Play();
         }
     }
 
