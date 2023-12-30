@@ -1,6 +1,8 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class DialogueActivator : MonoBehaviour
 {
@@ -8,6 +10,9 @@ public class DialogueActivator : MonoBehaviour
     [SerializeField] private List<string> dialogueContent;
     [SerializeField] private DialogueUI dialogueUI;
     private bool dialogueActivated = false;
+    [SerializeField] private bool activateTimeline = false;
+    [SerializeField] private PlayableDirector director;
+    [SerializeField] private GameObject melon;
 
     public void Interact()
     {
@@ -22,10 +27,21 @@ public class DialogueActivator : MonoBehaviour
             return;
         }
 
+        if (activateTimeline == true)
+        {
+            melon.SetActive(true);
+            director?.Play();
+            activateTimeline = false;
+        }
+
         if (!dialogueActivated)
         {
             Interact();
             dialogueActivated = true;
         }
+    }
+    public void HideMelon()
+    {
+        melon?.SetActive(false);
     }
 }
