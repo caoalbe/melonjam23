@@ -68,6 +68,7 @@ public class DialogueUI : MonoBehaviour
         {
             yield return null;
         }
+
         CloseDialogue();
     }
 
