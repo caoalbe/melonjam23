@@ -5,5 +5,8 @@ using UnityEngine;
 public class DialogueObject : ScriptableObject
 {
     [SerializeField][TextArea] public List<string> dialogue;
+    [SerializeField] public bool IsTutorial;
+    [SerializeField] public bool IsTutorialDone;
+    [SerializeField] public bool FirstDialogue;
 
 }

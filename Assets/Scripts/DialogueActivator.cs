@@ -13,11 +13,17 @@ public class DialogueActivator : MonoBehaviour
     [SerializeField] private bool activateTimeline = false;
     [SerializeField] private PlayableDirector director;
     [SerializeField] private GameObject melon;
+    [SerializeField] public bool IsTutorial;
+    [SerializeField] public bool IsTutorialDone;
+    [SerializeField] public bool FirstDialogue;
 
     public void Interact()
     {
         dialogueObject.dialogue = dialogueContent;
         dialogueUI.ShowDialogue(dialogueObject);
+        dialogueObject.IsTutorial = IsTutorial;
+        dialogueObject.IsTutorialDone = IsTutorialDone;
+        dialogueObject.FirstDialogue = FirstDialogue;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

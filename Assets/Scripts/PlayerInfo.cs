@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class PlayerInfo : MonoBehaviour
 {
+    public static bool IsTutorialDone = false;
+    public static bool CanTurnOnLight = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,10 +30,21 @@ public class PlayerInfo : MonoBehaviour
         }
 
         // Alternate Ghost form
-        if (Input.GetKeyDown(KeyCode.E))
+        if (CanTurnOnLight && Input.GetKeyDown(KeyCode.E))
         {
             // Gradually reduce the lamp size
             isLightTurningOff = true;
+
+            if (IsTutorialDone)
+            {
+                CanTurnOnLight = true;
+            }
+
+            else
+            {
+                CanTurnOnLight = false;
+            }
+            
         }
 
         // Make player vincible
