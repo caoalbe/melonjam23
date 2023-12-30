@@ -1,16 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using System;
 
 public class DialogueUI : MonoBehaviour
 {
     [SerializeField] private GameObject dialogueBox;
 
     public bool IsOpen { get; private set; }
-
+    [SerializeField] private GameObject player;
     [SerializeField] private TMP_Text textLabel;
-    
 
     private TypewriterEffect typewriterEffect;
     private void Start()
@@ -23,6 +21,9 @@ public class DialogueUI : MonoBehaviour
     {
         IsOpen = true;
         dialogueBox.SetActive(true);
+        RectTransform rt = dialogueBox.GetComponent<RectTransform>();
+        rt.transform.localPosition = new Vector2(player.transform.position.x + 200, player.transform.position.y + 200);
+
         StartCoroutine(StepThroughDialogue(dialogueObject));
     }
 
