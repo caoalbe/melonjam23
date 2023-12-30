@@ -13,6 +13,7 @@ public class Backend : MonoBehaviour
 
     // Scene and Checkpoint Manager
     private Vector3 currCheckpoint;
+    private bool reachSomeCheckpoint = false;
 
     public void ReloadLevel()
     {
@@ -22,14 +23,16 @@ public class Backend : MonoBehaviour
 
     public void SetCheckPoint(Vector3 newSpawn)
     {
+        reachSomeCheckpoint = true;
         currCheckpoint = newSpawn;
     }
 
     public Vector3 GetCheckPoint()
     {
-        if (currCheckpoint == null)
+        if (!reachSomeCheckpoint)
         {
-            return GameObject.Find("Checkpoints").transform.GetChild(0).position;
+            // Fallback to transform to initial placement of player
+            return GameObject.Find("Player").transform.position;
         }
         return currCheckpoint;
     }
