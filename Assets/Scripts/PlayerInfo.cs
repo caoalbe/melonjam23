@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerInfo : MonoBehaviour
 {
-    private float currTime = 0f;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -37,12 +35,10 @@ public class PlayerInfo : MonoBehaviour
         }
 
         // Make player vincible
-        if (lastHitTime + invincibilityDuration <= currTime)
+        if (lastHitTime + invincibilityDuration <= Time.time)
         {
             isPlayerInvincible = false;
         }
-
-        currTime += Time.deltaTime;
     }
 
     // Lamp System
@@ -78,7 +74,7 @@ public class PlayerInfo : MonoBehaviour
         health -= damage;
         isPlayerInvincible = true;
         HealthUpdated.Invoke();
-        lastHitTime = currTime;
+        lastHitTime = Time.time;
         if (health == 0) { Backend.instance.ReloadLevel(); }
     }
 
