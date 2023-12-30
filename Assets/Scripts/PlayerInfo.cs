@@ -6,17 +6,6 @@ using UnityEngine.Events;
 public class PlayerInfo : MonoBehaviour
 {
     private float currTime = 0f;
-    private bool isPlayerInvincible = false;
-    private bool isPlayerGhost = false;
-    private float t = 0;
-    private bool isLightTurningOff = false;
-    [SerializeField] private GameObject lamp;
-    [SerializeField] private int lampScale;
-    [SerializeField] private Sprite normalSprite;
-    [SerializeField] private Sprite ghostSprite;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private float lampTime;
-
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +45,13 @@ public class PlayerInfo : MonoBehaviour
         currTime += Time.deltaTime;
     }
 
+    // Lamp System
+    private float t = 0;
+    private bool isLightTurningOff = false;
+    [SerializeField] private GameObject lamp;
+    [SerializeField] private int lampScale;
+    [SerializeField] private float lampTime;
+
     // Health System
     private int health;
     [Header("Health Properties")]
@@ -63,6 +59,7 @@ public class PlayerInfo : MonoBehaviour
     [SerializeField] private float invincibilityDuration;
     [SerializeField] public UnityEvent HealthUpdated;
     private float lastHitTime = 0f;
+    private bool isPlayerInvincible = false;
 
     public int GetHealth()
     {
@@ -86,6 +83,11 @@ public class PlayerInfo : MonoBehaviour
     }
 
     // Ghost System
+    private bool isPlayerGhost = false;
+    [SerializeField] private Sprite normalSprite;
+    [SerializeField] private Sprite ghostSprite;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     private void SetGhost(bool newForm)
     {
         isPlayerGhost = newForm;
