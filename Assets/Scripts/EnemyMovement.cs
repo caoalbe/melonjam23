@@ -50,6 +50,7 @@ public class EnemyMovement : MonoBehaviour
 
             Physics2D.queriesStartInColliders = stashStartInColliders;
 
+            // TODO: Use flip in sprite-renderer instead
             // Move left-right
             instantaneousVelocity.x = speed * Time.fixedDeltaTime;
             if (player.transform.position.x < transform.position.x)

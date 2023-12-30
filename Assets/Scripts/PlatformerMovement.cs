@@ -38,6 +38,7 @@ public class PlatformerMovement : MonoBehaviour
             pressedJump = Input.GetButton("Jump");
         }
 
+        // TODO: Use flip in sprite-renderer instead
         // face character in correct direction
         if (thumbstick.x < 0) { transform.localScale = leftScale; }
         else if (thumbstick.x > 0) { transform.localScale = rightScale; }
