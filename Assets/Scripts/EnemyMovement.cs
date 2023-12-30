@@ -29,6 +29,8 @@ public class EnemyMovement : MonoBehaviour
     private bool grounded = false;
     private Vector2 instantaneousVelocity = new Vector2(0, 0);
 
+    [SerializeField] private Animator animator;
+
     void FixedUpdate()
     {
         // Check Grounded
@@ -72,6 +74,7 @@ public class EnemyMovement : MonoBehaviour
         else if (instantaneousVelocity.x > 0) { transform.localScale = rightScale; }
 
         rb.velocity = instantaneousVelocity;
+        animator.SetFloat("VeloX", Mathf.Abs(rb.velocity.x));
     }
 
     // Player Detection
