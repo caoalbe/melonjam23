@@ -54,6 +54,7 @@ public class PlayerInfo : MonoBehaviour
     [SerializeField] private int maxHealth;
     [SerializeField] private float invincibilityDuration;
     [SerializeField] public UnityEvent HealthUpdated;
+    [SerializeField] private GameObject transitionScreen;
     private float lastHitTime = 0f;
     private bool isPlayerInvincible = false;
 
@@ -75,7 +76,17 @@ public class PlayerInfo : MonoBehaviour
         isPlayerInvincible = true;
         HealthUpdated.Invoke();
         lastHitTime = Time.time;
-        if (health == 0) { Backend.instance.ReloadLevel(); }
+        if (health == 0) {
+            StartCoroutine(Death()); 
+        }
+    }
+
+    private IEnumerator Death()
+    {
+        transitionScreen.SetActive(true);
+        yield return new WaitForSeconds(1);
+        transitionScreen.SetActive(false);
+        Backend.instance.ReloadLevel();
     }
 
     // Ghost System
