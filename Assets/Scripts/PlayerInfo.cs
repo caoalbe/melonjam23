@@ -22,7 +22,6 @@ public class PlayerInfo : MonoBehaviour
     void Start()
     {
         SetHealth(maxHealth);
-        SetSanity(maxSanity);
     }
 
     // Update is called once per frame
@@ -46,12 +45,6 @@ public class PlayerInfo : MonoBehaviour
         {
             // Gradually reduce the lamp size
             isLightTurningOff = true;
-        }
-
-        // Decay the Sanity
-        if (isPlayerGhost && lastSanityDecayTime + sanityDecayCooldown <= currTime)
-        {
-            DecaySanity();
         }
 
         // Make player vincible
@@ -92,38 +85,10 @@ public class PlayerInfo : MonoBehaviour
         if (health == 0) { Backend.instance.ReloadLevel(); }
     }
 
-    // Sanity System
-    private int sanity; // takes values from [0,..100]
-    [Header("Sanity Properties")]
-    [SerializeField] private int maxSanity;
-    [SerializeField] public int sanityDecayAmount;
-    [SerializeField] public float sanityDecayCooldown;
-    public UnityEvent SanityUpdated;
-    private float lastSanityDecayTime = 0f;
-
-    public int GetSanity()
-    {
-        return this.sanity;
-    }
-
-    public void SetSanity(int amount)
-    {
-        this.sanity = amount;
-        SanityUpdated.Invoke();
-    }
-
-    private void DecaySanity()
-    {
-        this.sanity -= sanityDecayAmount;
-        SanityUpdated.Invoke();
-        this.lastSanityDecayTime = currTime;
-    }
-
     // Ghost System
     private void SetGhost(bool newForm)
     {
         isPlayerGhost = newForm;
-        lastSanityDecayTime = currTime;
         int ghostLayer = LayerMask.NameToLayer("Ghost");
         int normalLayer = LayerMask.NameToLayer("Player");
         if (newForm)
