@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: melon-cave-bg-dark_113
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 984586498, guid: 12e142161b19c774284472fa3728ad57, type: 3}
+  m_Sprite: {fileID: -757121806, guid: 12e142161b19c774284472fa3728ad57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
