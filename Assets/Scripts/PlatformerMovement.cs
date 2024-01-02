@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO:
-// Coyote Time
-// Jump Buffering
-
 public class PlatformerMovement : MonoBehaviour
 {
     [Header("Components")]

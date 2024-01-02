@@ -13,7 +13,7 @@
 
 # Links
 
-TODO: [Our Submission](https://itch.io/) \
+[Our Submission](https://caoalbe.itch.io/undying-charm) \
 [Wintermelon](https://itch.io/jam/winter-melonjam-2023) \
 [Discord](https://discord.gg/uYmNuZymJ2)
 
